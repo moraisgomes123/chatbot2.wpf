@@ -13,7 +13,7 @@ namespace CybersecurityChatbot
             InitializeComponent();
 
             // =========================
-            // ASCII BANNER (YOUR ORIGINAL)
+            // ASCII BANNER
             // =========================
             AsciiBanner.Text = @"
 ╔══════════════════════════════════════════════════════════════╗
@@ -39,7 +39,7 @@ namespace CybersecurityChatbot
             _chatbot = new ChatbotEngine(service);
 
             // =========================
-            // GREETING (NO DUPLICATION BUG)
+            // GREETING
             // =========================
             ChatDisplay.AppendText("Chatbot: Hello! What is your name?\n\n");
         }
