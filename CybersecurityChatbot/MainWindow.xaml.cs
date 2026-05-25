@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using CybersecurityChatbot.Chatbot;
 using CybersecurityChatbot.Services;
 
@@ -12,6 +12,9 @@ namespace CybersecurityChatbot
         {
             InitializeComponent();
 
+            // =========================
+            // ASCII BANNER (YOUR ORIGINAL)
+            // =========================
             AsciiBanner.Text = @"
 ╔══════════════════════════════════════════════════════════════╗
 ║        ░█████╗░██╗░░░██╗██████╗░███████╗██████╗░             ║
@@ -25,54 +28,39 @@ namespace CybersecurityChatbot
 ╚══════════════════════════════════════════════════════════════╝
 ";
 
-            var loader =
-                new JsonResponseLoader("Data/responses.json");
+            // =========================
+            // LOAD RESPONSES
+            // =========================
+            var loader = new JsonResponseLoader("Data/responses.json");
+            var responses = loader.LoadResponses();
 
-            var responses =
-                loader.LoadResponses();
+            var service = new ResponseService(responses);
 
-            var service =
-                new ResponseService(responses);
+            _chatbot = new ChatbotEngine(service);
 
-            _chatbot =
-                new ChatbotEngine(service);
-
-            new VoiceGreeting().PlayGreeting();
-
-            // ===================================
-            // ASK USER FOR NAME AT STARTUP
-            // ===================================
-
-            string welcomeMessage =
-                _chatbot.ProcessMessage("");
-
-            ChatDisplay.AppendText(
-                "Bot: " + welcomeMessage + "\n\n");
+            // =========================
+            // GREETING (NO DUPLICATION BUG)
+            // =========================
+            ChatDisplay.AppendText("Chatbot: Hello! What is your name?\n\n");
         }
 
-        private void SendButton_Click(
-            object sender,
-            RoutedEventArgs e)
+        private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string input =
-                UserInput.Text;
+            string input = UserInput.Text;
 
             if (string.IsNullOrWhiteSpace(input))
                 return;
 
             // Show user message
-            ChatDisplay.AppendText(
-                "You: " + input + "\n");
+            ChatDisplay.AppendText("You: " + input + "\n");
 
-            // Get bot response
-            string response =
-                _chatbot.ProcessMessage(input);
+            // Get chatbot response
+            string response = _chatbot.ProcessMessage(input);
 
-            // Show bot response
-            ChatDisplay.AppendText(
-                "Bot: " + response + "\n\n");
+            // Show chatbot response
+            ChatDisplay.AppendText("Chatbot: " + response + "\n\n");
 
-            // Clear input box
+            // Clear input
             UserInput.Clear();
         }
     }
