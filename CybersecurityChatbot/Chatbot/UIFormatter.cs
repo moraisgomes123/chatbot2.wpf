@@ -1,4 +1,4 @@
-﻿namespace CybersecurityChatbot.Chatbot
+namespace CybersecurityChatbot.Chatbot
 {
     public static class UIFormatter
     {
@@ -9,10 +9,9 @@
 
         public static string User(string userName, string message)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-                return "You: " + message;
-
-            return $"{userName}: {message}";
+            return string.IsNullOrWhiteSpace(userName)
+                ? "You: " + message
+                : $"{userName}: {message}";
         }
     }
 }
