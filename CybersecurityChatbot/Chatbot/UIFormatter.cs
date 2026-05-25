@@ -2,14 +2,17 @@
 {
     public static class UIFormatter
     {
-        public static string FormatBotMessage(string message)
+        public static string Bot(string message)
         {
-            return "Bot: " + message;
+            return "Chatbot: " + message;
         }
 
-        public static string FormatUserMessage(string message)
+        public static string User(string userName, string message)
         {
-            return "You: " + message;
+            if (string.IsNullOrWhiteSpace(userName))
+                return "You: " + message;
+
+            return $"{userName}: {message}";
         }
     }
 }
