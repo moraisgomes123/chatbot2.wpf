@@ -13,47 +13,45 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <!-- HEADER -->
         <Border Background="#252526"
-        CornerRadius="10"
-        Padding="15"
-        Margin="0 0 0 10">
+                CornerRadius="10"
+                Padding="15"
+                Margin="0 0 0 10">
 
             <StackPanel>
 
                 <TextBlock Text="CYBERSECURITY AWARENESS BOT"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="Cyan"
-                   HorizontalAlignment="Center"/>
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="Cyan"
+                           HorizontalAlignment="Center"/>
 
                 <TextBlock Text="Stay Safe Online!"
-                   FontSize="16"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   Margin="0,5,0,10"/>
+                           FontSize="16"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,5,0,10"/>
 
-                <!-- ASCII BANNER -->
                 <TextBlock Name="AsciiBanner"
-                   FontFamily="Consolas"
-                   FontSize="12"
-                   Foreground="Cyan"
-                   TextAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap"
-                   Margin="0,5,0,0"/>
+                           FontFamily="Consolas"
+                           FontSize="12"
+                           Foreground="Cyan"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
-        <!-- CHAT -->
-        <ScrollViewer Grid.Row="1">
 
-            <TextBox Name="ChatDisplay"
+        <!-- CHAT AREA (FIXED) -->
+        <RichTextBox Name="ChatDisplay"
+                     Grid.Row="1"
                      IsReadOnly="True"
-                     TextWrapping="Wrap"
                      Background="#2D2D30"
+                     FontSize="14"
                      Foreground="White"
-                     FontSize="14"/>
-        </ScrollViewer>
+                     VerticalScrollBarVisibility="Auto"/>
 
         <!-- INPUT -->
         <StackPanel Grid.Row="2"
