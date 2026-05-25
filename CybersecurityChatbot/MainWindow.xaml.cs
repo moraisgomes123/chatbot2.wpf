@@ -1,4 +1,6 @@
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 using CybersecurityChatbot.Chatbot;
 using CybersecurityChatbot.Services;
 
@@ -28,20 +30,14 @@ namespace CybersecurityChatbot
 ╚══════════════════════════════════════════════════════════════╝
 ";
 
-            // =========================
-            // LOAD RESPONSES
-            // =========================
+
             var loader = new JsonResponseLoader("Data/responses.json");
             var responses = loader.LoadResponses();
 
             var service = new ResponseService(responses);
-
             _chatbot = new ChatbotEngine(service);
 
-            // =========================
-            // GREETING
-            // =========================
-            ChatDisplay.AppendText("Chatbot: Hello! What is your name?\n\n");
+            AppendMessage("Chatbot", "Hello! What is your name?", Colors.Cyan);
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
@@ -51,17 +47,33 @@ namespace CybersecurityChatbot
             if (string.IsNullOrWhiteSpace(input))
                 return;
 
-            // Show user message
-            ChatDisplay.AppendText("You: " + input + "\n");
+            AppendMessage("You", input, Colors.LightGreen);
 
-            // Get chatbot response
             string response = _chatbot.ProcessMessage(input);
 
-            // Show chatbot response
-            ChatDisplay.AppendText("Chatbot: " + response + "\n\n");
+            AppendMessage("Chatbot", response, Colors.Cyan);
 
-            // Clear input
             UserInput.Clear();
+        }
+
+        // ✅ NEW CORE FIX (COLOR SYSTEM)
+        private void AppendMessage(string sender, string message, Color color)
+        {
+            Paragraph paragraph = new Paragraph();
+
+            paragraph.Inlines.Add(new Run(sender + ": ")
+            {
+                Foreground = new SolidColorBrush(color),
+                FontWeight = FontWeights.Bold
+            });
+
+            paragraph.Inlines.Add(new Run(message)
+            {
+                Foreground = new SolidColorBrush(Colors.White)
+            });
+
+            ChatDisplay.Document.Blocks.Add(paragraph);
+            ChatDisplay.ScrollToEnd();
         }
     }
 }
