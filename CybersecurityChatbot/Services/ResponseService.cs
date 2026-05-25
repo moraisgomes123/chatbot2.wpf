@@ -65,7 +65,7 @@ namespace CybersecurityChatbot.Services
                     reply = match.Replies[0];
 
                     return reply +
-                        "\n\nWould you like tips or examples about this topic?";
+                        "\n\nWould you like tips on this topic?";
                 }
 
                 // ===================================
